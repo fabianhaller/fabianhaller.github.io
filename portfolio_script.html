@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fabian HALLER — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d0d;
+    --bg2: #141414;
+    --bg3: #1a1a1a;
+    --surface: #1f1f1f;
+    --border: rgba(255,255,255,0.07);
+    --accent: #7c6ef7;
+    --accent2: #a594ff;
+    --text: #f0f0f0;
+    --muted: #888;
+    --muted2: #555;
+    --radius: 14px;
+    --ff-display: 'Syne', sans-serif;
+    --ff-body: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--ff-body);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--ff-display);
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* SECTIONS */
+  section { padding: 7rem 3rem; max-width: 1100px; margin: 0 auto; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 3rem; padding-top: 5rem;
+  }
+  .hero-left { flex: 1; }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.75rem; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--accent2);
+    border: 1px solid rgba(124,110,247,0.35);
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-family: var(--ff-display);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+  .hero-title span { color: var(--accent2); }
+  .hero-sub {
+    font-size: 1rem; color: var(--muted);
+    max-width: 440px; margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .hero-sub strong { color: var(--text); font-weight: 500; }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 100px;
+    font-size: 0.875rem; font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer; border: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+  .hero-right {
+    width: 220px; height: 220px; flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--surface), var(--bg3));
+    border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--ff-display);
+    font-size: 4rem; font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    position: relative;
+    overflow: hidden;
+  }
+  /* If you have a photo: replace with <img> */
+  .hero-avatar-hint {
+    position: absolute; bottom: 0.5rem; left: 0; right: 0;
+    text-align: center; font-size: 0.6rem;
+    color: var(--muted2); font-family: var(--ff-body);
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+
+  /* SECTION HEADER */
+  .section-label {
+    font-size: 0.7rem; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--muted2); margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: var(--ff-display);
+    font-size: clamp(1.6rem, 3vw, 2.5rem);
+    font-weight: 800; letter-spacing: -0.03em;
+    color: var(--text); margin-bottom: 3rem;
+  }
+
+  /* PARCOURS */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid; grid-template-columns: 160px 1px 1fr;
+    gap: 0 2rem; align-items: start;
+  }
+  .timeline-date {
+    font-size: 0.8rem; color: var(--muted);
+    padding-top: 0.3rem; text-align: right;
+  }
+  .timeline-line-col {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0;
+  }
+  .timeline-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); flex-shrink: 0;
+    margin-top: 0.45rem;
+  }
+  .timeline-connector {
+    width: 1px; background: var(--border);
+    flex: 1; min-height: 2.5rem;
+  }
+  .timeline-content { padding-bottom: 2.5rem; }
+  .timeline-content h3 {
+    font-family: var(--ff-display);
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--text); margin-bottom: 0.4rem;
+  }
+  .timeline-content p { font-size: 0.9rem; color: var(--muted); }
+
+  /* PROJETS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+    text-decoration: none; color: inherit;
+    display: flex; flex-direction: column;
+  }
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(124,110,247,0.4);
+  }
+  .project-thumb {
+    height: 180px;
+    background: var(--bg3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .project-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+  .project-title {
+    font-family: var(--ff-display);
+    font-size: 1rem; font-weight: 700; color: var(--text);
+  }
+  .project-desc { font-size: 0.85rem; color: var(--muted); flex: 1; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+  .tag {
+    font-size: 0.7rem; padding: 0.2rem 0.6rem;
+    background: rgba(124,110,247,0.1);
+    color: var(--accent2);
+    border-radius: 100px;
+    border: 1px solid rgba(124,110,247,0.25);
+  }
+
+  .pdf-btn {
+    margin-top: 0.75rem;
+    font-size: 0.78rem;
+    padding: 0.45rem 1rem;
+    border-radius: 100px;
+    align-self: flex-start;
+  }
+
+  /* COMPETENCES */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+  }
+  .skill-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem 0.8rem;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 0.6rem;
+    transition: border-color 0.2s, background 0.2s;
+    text-decoration: none;
+  }
+  .skill-item:hover {
+    border-color: rgba(124,110,247,0.4);
+    background: rgba(124,110,247,0.05);
+  }
+  .skill-icon { font-size: 2rem; }
+  .skill-name { font-size: 0.78rem; color: var(--muted); text-align: center; }
+
+  /* A PROPOS */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: start;
+  }
+  .about-text p { font-size: 0.95rem; color: var(--muted); line-height: 1.9; margin-bottom: 1rem; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .about-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .about-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.5rem;
+  }
+  .about-card-label { font-size: 0.7rem; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+  .about-card-value { font-size: 0.95rem; color: var(--text); font-weight: 500; }
+
+  /* MES ETUDES */
+  .etudes-tabs {
+    display: flex; gap: 0.5rem; margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
+  }
+  .etude-tab {
+    font-size: 0.85rem; font-weight: 500;
+    color: var(--muted);
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s, border-color 0.2s;
+    background: none; border-top: none; border-left: none; border-right: none;
+    font-family: var(--ff-body);
+  }
+  .etude-tab:hover { color: var(--text); }
+  .etude-tab.active { color: var(--accent2); border-bottom-color: var(--accent); }
+
+  .etude-panel { display: none; }
+  .etude-panel.active { display: block; }
+
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .module-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+  }
+  .module-card-top {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 0.6rem;
+  }
+  .module-name { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+  .module-note {
+    font-size: 0.8rem; font-weight: 700;
+    color: var(--accent2);
+    background: rgba(124,110,247,0.12);
+    border: 1px solid rgba(124,110,247,0.25);
+    border-radius: 100px;
+    padding: 0.15rem 0.6rem;
+  }
+  .module-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+  .bilan-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .bilan-block h3 {
+    font-family: var(--ff-display);
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--text); margin-bottom: 0.8rem;
+  }
+  .bilan-block p { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+  .bilan-block ul {
+    list-style: none; display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.8rem;
+  }
+  .bilan-block ul li {
+    font-size: 0.88rem; color: var(--muted);
+    padding-left: 1.2rem; position: relative;
+  }
+  .bilan-block ul li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--accent); font-size: 0.75rem;
+  }
+
+  .stage-card {
+    background: var(--surface);
+    border: 1px solid rgba(124,110,247,0.3);
+    border-radius: var(--radius);
+    padding: 2rem;
+    display: flex; gap: 2rem; align-items: flex-start;
+  }
+  .stage-logo {
+    width: 60px; height: 60px; border-radius: 12px;
+    background: var(--bg3); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; flex-shrink: 0;
+  }
+  .stage-info h3 {
+    font-family: var(--ff-display);
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--text); margin-bottom: 0.3rem;
+  }
+  .stage-meta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    margin-bottom: 0.8rem;
+  }
+  .stage-meta span { font-size: 0.78rem; color: var(--muted); }
+  .stage-meta span strong { color: var(--accent2); }
+  .stage-missions { display: flex; flex-direction: column; gap: 0.35rem; }
+  .stage-missions li {
+    font-size: 0.88rem; color: var(--muted); list-style: none;
+    padding-left: 1.2rem; position: relative;
+  }
+  .stage-missions li::before {
+    content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; top: 0.15rem;
+  }
+
+  /* CONTACT */
+  #contact { text-align: center; }
+  #contact .section-title { margin-bottom: 0.75rem; }
+  .contact-sub { font-size: 1rem; color: var(--muted); margin-bottom: 2.5rem; }
+  .contact-links {
+    display: flex; justify-content: center; flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    text-align: center;
+    font-size: 0.8rem; color: var(--muted2);
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    max-width: 1100px; margin: 0 auto;
+    border: none; border-top: 1px solid var(--border);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    section { padding: 5rem 1.5rem; }
+    #hero { flex-direction: column-reverse; align-items: flex-start; }
+    .hero-right { width: 140px; height: 140px; font-size: 2.5rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 100px 1px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#hero" class="nav-logo">Fabian HALLER</a>
+  <ul class="nav-links">
+    <li><a href="#parcours">Parcours</a></li>
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <li><a href="#mes-etudes">Mes études</a></li>
+    <li><a href="#a-propos">À propos</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <span class="hero-eyebrow">Étudiant • B.U.T Science des données</span>
+    <h1 class="hero-title">Bonjour, je suis<br /><span>Fabian HALLER</span></h1>
+    <p class="hero-sub">
+      J'ai <strong>20 ans</strong> (07/02/2006) et je suis étudiant en <strong>B.U.T Science des données</strong> 2024-2027 à l'<strong>I.U.T de Niort</strong>.<br />
+      Passionné par <strong>les mathématiques</strong> et <strong>la programmation</strong>, je cherche à construire des projets qui ont du sens.
+    </p>
+    <div class="hero-ctas">
+      <a href="Fabian HALLER CV.pdf" class="btn btn-primary">📄 Télécharger mon CV</a>
+      <a href="#projets" class="btn btn-outline">Voir mes projets →</a>
+      <a href="#contact" class="btn btn-outline">Me contacter</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="image/photo de profil.jpg" alt="Portrait" style="width:100%;height:100%;object-fit:cover;" />
+
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- PARCOURS -->
+<section id="parcours">
+  <p class="section-label">Parcours</p>
+  <h2 class="section-title">Mon parcours académique</h2>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <span class="timeline-date">2021 — 2024</span>
+      <div class="timeline-line-col">
+        <div class="timeline-dot"></div>
+        <div class="timeline-connector"></div>
+      </div>
+      <div class="timeline-content">
+        <h3>Lycée</h3>
+        <p>Baccalauréat Général — spécialités Mathématiques, Physique - Chimie et Science de l'ingénieur.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-date">2024 — 2025</span>
+      <div class="timeline-line-col">
+        <div class="timeline-dot"></div>
+        <div class="timeline-connector"></div>
+      </div>
+      <div class="timeline-content">
+        <h3>BUT1 - Science des Données</h3>
+        <p>Trois grand thèmes : Traiter des données à des fins décisionnelles, Analyser statistiquement les données et Valoriser une production dans un contexte professionnel.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-date">2025 — 2026</span>
+      <div class="timeline-line-col">
+        <div class="timeline-dot"></div>
+        <div class="timeline-connector"></div>
+      </div>
+      <div class="timeline-content">
+        <h3>BUT2 — Science des Données</h3>
+        <p>Quatres grand thèmes : Traiter des données à des fins décisionnelles, Analyser statistiquement les données, Valoriser une production dans un contexte professionnel et Modéliser les données dans un cadre statistique.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- PROJETS -->
+<section id="projets">
+  <p class="section-label">Sélection</p>
+  <h2 class="section-title">Mes meilleurs projets</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-thumb" style="overflow:hidden; border-radius:8px;">
+        <img src="projet/projet vba - image.png" alt="Image projet" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div class="project-body">
+        <p class="project-title">BUT1 - 2024/2025 - Création d'un reporting sur Excel</p>
+        <p class="project-desc">Développer une application de gestion de notes pour un étudiant de BUT1 en Science des Données.</p>
+        <div class="project-tags">
+          <span class="tag">Excel</span>
+          <span class="tag">VBA</span>
+        </div>
+        <a href="projet/sae excel-vba.xlsm" target="_blank" class="btn btn-outline pdf-btn">Découvrir l'application</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-thumb" style="overflow:hidden; border-radius:8px;">
+        <img src="projet/dataviz image.png" alt="Image projet" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div class="project-body">
+        <p class="project-title">BUT1 - 2024/2025 - Challenge Dataviz</p>
+        <p class="project-desc">Réaliser une Datavisualisation efficacement.</p>
+        <div class="project-tags">
+          <span class="tag">Power Bi</span>
+          <span class="tag">Excel</span>
+        </div>
+        <a href="projet/Challenge Dataviz.png" target="_blank" class="btn btn-outline pdf-btn">Découvrire la Datavisualisation</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-thumb" style="overflow:hidden; border-radius:8px;">
+        <img src="projet/indicateur perf -image.png" alt="Image projet" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div class="project-body">
+        <p class="project-title">BUT1 - 2024/2025 - Indicateurs de performances</p>
+        <p class="project-desc">Construire un compte rendu sur la situation économique de Poujoulat.</p>
+        <div class="project-tags">
+          <span class="tag">Excel</span>
+          <span class="tag">Word</span>
+        </div>
+        <a href="projet/Sae indicateurs de performances.pdf" target="_blank" class="btn btn-outline pdf-btn">Lire le rapport</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-thumb" style="overflow:hidden; border-radius:8px;">
+        <img src="projet/aluminum - image.png" alt="Image projet" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div class="project-body">
+        <p class="project-title">BUT2 - 2025/2026 - Séries Temporelles</p>
+        <p class="project-desc">Analyse et prédictions du cours d'un métaux précieux ou stratégiques. Pour ce projet cette analyse s'est porté sur l'aluminium.</p>
+        <div class="project-tags">
+          <span class="tag">Excel</span>
+          <span class="tag">Word</span>
+        </div>
+        <a href="projet/Saé - Aluminium.pdf" target="_blank" class="btn btn-outline pdf-btn">Lire le rapport</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-thumb" style="overflow:hidden; border-radius:8px;">
+        <img src="projet/talend.webp" alt="Image projet" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div class="project-body">
+        <p class="project-title">BUT2 - 2025/2026 - Intégration de Données dans un Datawarehouse</p>
+        <p class="project-desc">Nettoyer, trier et intégrer un grand volume de données dans un entrepôt de données.</p>
+        <div class="project-tags">
+          <span class="tag">Talend</span>
+          <span class="tag">Docker Desktop</span>
+          <span class="tag">Power Bi</span>
+        </div>
+        <a href="projet/datawarehouse.pdf" target="_blank" class="btn btn-outline pdf-btn">Découvrir le rapport</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-thumb" style="overflow:hidden; border-radius:8px;">
+        <img src="projet/projet besoins du territoire - image.png" alt="Image projet" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div class="project-body">
+        <p class="project-title">BUT2 - 2025/2026 - Besoins du térritoire</p>
+        <p class="project-desc">Créer une application de gestion de la flotte de véhicules d'un laboratoire de Vendée.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">HTML</span>
+        </div>
+        <a href="projet/SAé Territoire.zip" target="_blank" class="btn btn-outline pdf-btn">Découvrir le projet</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- COMPETENCES -->
+<section id="competences">
+  <p class="section-label">Stack</p>
+  <h2 class="section-title">🛠️ Compétences techniques</h2>
+  <div class="skills-grid">
+    <!-- Ajoute / retire des compétences selon ton profil -->
+    <a href="https://fr.wikipedia.org/wiki/Python_(langage)" class="skill-item">
+      <span class="skill-icon">🐍</span>
+      <span class="skill-name">Python</span>
+    </a>
+    <a href="https://fr.wikipedia.org/wiki/Microsoft_Excel" class="skill-item">
+      <span class="skill-icon">🗒️</span>
+      <span class="skill-name">Excel</span>
+    </a>
+    <a href="https://fr.wikipedia.org/wiki/Structured_Query_Language" class="skill-item">
+      <span class="skill-icon">🗄️</span>
+      <span class="skill-name">SQL</span>
+    </a>
+    <a href="https://fr.wikipedia.org/wiki/GitHub" class="skill-item">
+      <span class="skill-icon">🐙</span>
+      <span class="skill-name">GitHub</span>
+    </a>
+    <a href="https://fr.wikipedia.org/wiki/Docker_(logiciel)" class="skill-item">
+      <span class="skill-icon">🐳</span>
+      <span class="skill-name">Docker</span>
+    </a>
+    <a href="https://fr.wikipedia.org/wiki/Visual_Studio_Code" class="skill-item">
+      <span class="skill-icon">💻</span>
+      <span class="skill-name">VS Code</span>
+    </a>
+    <a href="https://fr.wikipedia.org/wiki/Talend" class="skill-item">
+      <span class="skill-icon">🔗</span>
+      <span class="skill-name">Talend</span>
+    </a>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- A PROPOS -->
+<section id="a-propos">
+  <p class="section-label">À propos</p>
+  <h2 class="section-title">Qui suis-je ?</h2>
+
+  <!-- Bloc 1 : texte gauche, photo droite -->
+  <div class="about-grid" style="display:flex; align-items:center; gap:2rem; margin-bottom:3rem;">
+    <div class="about-text" style="flex:1;">
+      <p>
+        En dehors de mes études, le football occupe une place centrale dans ma vie. Je pratique ce sport depuis l'âge de 9 ans, et cette passion ne m'a jamais quitté. Le foot est pour moi bien plus qu'un simple loisir : c'est un équilibre, une façon de me dépenser, de me vider la tête et de prendre du plaisir après les journées de cours. J'évolue actuellement au niveau régional, ce qui me permet de maintenir un esprit de compétition tout en cultivant des valeurs qui me sont chères : le collectif, la rigueur et le dépassement de soi.
+      </p>
+    </div>
+    <div style="flex:1;">
+      <img src="image/foot.JPG" alt="Photo 1" style="width:100%; border-radius:12px; object-fit:cover; max-height:350px;">
+    </div>
+  </div>
+
+  <!-- Bloc 2 : photo gauche, texte droite -->
+  <div class="about-grid" style="display:flex; align-items:center; gap:2rem; margin-bottom:3rem;">
+    <div style="flex:1;">
+      <img src="image/mouton.JPG" alt="Photo 2" style="width:100%; border-radius:12px; object-fit:cover; max-height:350px;">
+    </div>
+    <div class="about-text" style="flex:1;">
+      <p>
+        Je consacre également une partie de mon temps libre à aider mon frère agriculteur dans son quotidien, notamment avec ses animaux. C'est une activité qui me tient particulièrement à cœur, car elle me permet de garder les pieds sur terre et de rester en contact avec la nature, loin des écrans et du monde numérique dans lequel j'évolue au quotidien. Plus qu'un simple coup de main, c'est une façon de rester utile concrètement, de retrouver un rythme différent et de me ressourcer. Cet ancrage rural est une vraie richesse pour moi, et un bel équilibre avec ma vie étudiante.
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- MES ETUDES -->
+<section id="mes-etudes">
+  <p class="section-label">Mes études</p>
+  <h2 class="section-title">Bilan de ma formation</h2>
+
+  <div class="etudes-tabs">
+    <button class="etude-tab active" onclick="switchTab(event, 'tab-bilan')">📝 Bilan pédagogique</button>
+    <button class="etude-tab" onclick="switchTab(event, 'tab-stage')">🏢 Stage &amp; Alternance</button>
+  </div>
+
+  <!-- PANEL : BILAN -->
+  <div id="tab-bilan" class="etude-panel active">
+    <div class="bilan-block">
+      <h3>Bilan première année</h3>
+      <p>
+        Cette première année a marqué pour moi une véritable entrée dans l'univers de la data. Découvrir ce domaine, ses outils, ses logiques et ses possibilités a été une expérience enrichissante qui a rapidement confirmé que j'avais fait le bon choix de formation.
+        Cependant, cette année n'a pas été sans embûches. Un problème de santé est venu perturber mon parcours de manière significative, m'éloignant des cours pendant plusieurs semaines. Cette période a été difficile à vivre, tant sur le plan personnel que scolaire, car je voyais le retard s'accumuler et la distance avec le groupe s'agrandir.
+        Pourtant, c'est précisément dans ces moments-là que j'ai pris conscience à quel point cette formation me tenait à cœur. Loin de me décourager, cette situation a renforcé ma détermination. J'ai fourni des efforts importants pour rattraper le retard accumulé, en travaillant de manière plus ciblée et plus organisée qu'auparavant. Chaque cours rattrapé, chaque notion assimilée était une petite victoire qui alimentait ma motivation.
+        Au final, cette épreuve m'a permis de me révéler à moi-même : ma capacité de résilience, mon engagement réel envers ce que j'apprends, et surtout une envie de réussir décuplée. La data est un domaine qui me passionne sincèrement, et cette année avec ses hauts et ses bas n'a fait que consolider cette conviction.
+      </p>
+    </div>
+    <div class="bilan-block">
+      <h3>Bilan deuxième année</h3>
+      <p>
+        La deuxième année a représenté une étape charnière dans mon parcours. Après avoir posé les fondations en première année, j'ai eu l'opportunité d'approfondir mes connaissances et de découvrir de nouvelles notions qui sont venues enrichir et consolider mes acquis. Chaque nouvelle compétence abordée faisait écho à ce que j'avais déjà appris, et voir ces briques s'assembler progressivement a été une source de grande satisfaction.
+        Cette année m'a également conforté dans mon choix d'orientation : les enseignements dispensés m'ont énormément plu, tant par leur contenu que par la façon dont ils m'ont permis d'aller toujours plus loin dans ma compréhension du monde de la data. J'ai senti une réelle progression, aussi bien technique que méthodologique, ce qui a renforcé ma confiance en mes capacités.
+        Mais la véritable révélation de cette année a sans doute été la découverte du monde de l'entreprise à travers mon stage. Passer d'un environnement purement académique à un contexte professionnel réel a été une expérience marquante. Pour la première fois, j'ai eu l'occasion de travailler sur des données réelles, avec des enjeux concrets, au sein d'une équipe. Cette immersion m'a permis de mesurer la portée de ce que j'avais appris, mais aussi d'identifier des axes sur lesquels je souhaitais encore progresser.
+        Cette expérience en entreprise a été décisive : elle a cristallisé mon envie de continuer dans cette voie et de poursuivre en troisième année, cette fois en alternance. Ce rythme me semble en effet idéal pour continuer à monter en compétences tout en étant pleinement ancré dans la réalité professionnelle.
+    </div>
+  </div>
+
+  <!-- PANEL : STAGE & ALTERNANCE -->
+  <div id="tab-stage" class="etude-panel">
+    <div class="stage-card" style="margin-bottom:1.5rem;">
+    <div class="stage-logo"><img src="logo rdp.png" alt="Logo entreprise" style="width:50px; height:50px; object-fit:contain;"></div>
+      <div class="stage-info">
+        <h3>Retour de Plage — Stage</h3>
+        <div class="stage-meta">
+          <span>📅 <strong>Avril 2026 → Juin 2026</strong></span>
+          <span>📍 <strong>Dolus-d'Oléron, Charente-Maritime, France</strong></span>
+          <span>⏱ <strong>10 semaines</strong></span>
+        </div>
+        <ul class="stage-missions">
+          <li>Mission 1 —> Exploration des données collectées sur les différents canaux de distribution et de communication, en lien avec les équipes E-commerce et Communication</li>
+          <li>Mission 2 —> Vérification de la qualité des données collectées et stockage dans des bases de données structurées en vue de leur analyse et exploitation</li>
+          <li>Mission 3 —> Sélection des outils statistiques appropriés à la situation rencontrée et utilisation de ces outils dans le cadre d'une analyse ou d'une modélisation des données</li>
+          <li>Mission 4 —> Production de résultats pertinents sous forme de rapports, tableaux et graphiques, afin d'accompagner la prise de décision de l'entreprise</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+function switchTab(e, panelId) {
+  document.querySelectorAll('.etude-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.etude-panel').forEach(p => p.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+</script>
+
+<hr class="section-divider" />
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Contact</p>
+  <h2 class="section-title">On travaille ensemble ?</h2>
+  <p class="contact-sub">N'hésite pas à m'écrire pour un stage, une alternance ou juste pour échanger.</p>
+  <div class="contact-links">
+    <a href="mailto:fabian.haller@etu.univ-poitiers.fr" class="btn btn-primary">✉️ M'envoyer un email</a>
+    <a href="www.linkedin.com/in/fabian-haller-432537344" target="_blank" class="btn btn-outline">LinkedIn →</a>
+    <a href="https://github.com/fabianhaller" target="_blank" class="btn btn-outline">GitHub →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Fabian HALLER — Tous droits réservés</p>
+</footer>
+
+</body>
+</html>
